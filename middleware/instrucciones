@@ -1,0 +1,9 @@
+#INSTRUCCIONES PRUEBAS MIDDLE WARE
+#CONSTRUIR IMAGEN
+ > $ docker image build -t middleware:v3 .
+# CORRER CONTENEDOR
+docker container create --name mware -v shared:/middleware/output middleware:v3
+> $ docker start mware
+# Comprobar resultados
+> $ docker container logs mware 
+> $ docker container logs mware 

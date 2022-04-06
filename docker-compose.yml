@@ -1,0 +1,39 @@
+version: '3'
+services:
+  trace_gen:
+    image: "generator:v1"
+    build: traceGenerator/
+    environment:
+      SAMPLES: "${SAMPLES}"
+      SIZE: "${SIZE}"
+      INTER_ARRIVAL: "${INTER_ARRIVAL}"
+      READ_RATIO: "${READ_RATIO}"
+      SAS: "${SAS}"
+      DISTRIBUTION: "${DISTRIBUTION}"
+      MEAN: "${MEAN}"
+      STDEV: "${STDEV}"
+      CONCURRENCY: "${CONCURRENCY}"
+    volumes:
+      - shared:/generator/output
+    stdin_open: true
+    tty: true
+  queue_sim:
+    image: "queuesim:v1"
+    build: QueueSimulator/
+    depends_on:
+      - "middleware"
+    volumes:
+      - shared:/simulator/output
+    stdin_open: true
+    tty: true
+  middleware:
+    image: "middleware:v1"
+    build: middleware/
+    volumes:
+      - shared:/middleware/output
+    stdin_open: true
+    tty: true
+
+volumes:
+  shared:
+    external: true

@@ -1,0 +1,50 @@
+GENERADOR DE TRAZAS
+
+Para compilar generator utiliza el siguiente comando:
+make clean ------> sirve para borrar los ejecutables antiguos
+make  --------> genera el ejecutable
+
+Ejecutar generator:
+
+./generator <samples > <size> <inter_arrival> <read_ratio> <sas_size> <distribution> <mean> <stdev> <Concurrency> > traza1.txt
+
+Ejemplo:
+./generator 100 500 1 80 5493 1 0 0 1
+
+Donde:
+samples: es el número de muestras que se desea obtener (a partir de 100 muestras)
+size: tamaño promedio del archivo
+inter_arrival: es el tiempo de interarrivo promedio de las peticiones
+read_ratio: el raito de lectura, es decir la cantidad de datos que vas a leer (utilizando la proporcion de pareto)
+sas_size: tamaño
+distribution: 1:Uniforme, 2:Poisson, y 3:Normal
+mean: la media utilizada para la distribución normal
+stdev: desviación estándar utilizada para la distribución normal
+Concurrency: la concurrencia de peticiones (se recomienda utilizarlo solo en 1 o 2 para el valor a asignar)
+
+
+Output: 
+
+<inter_arrival>, <worker_id>, <operation>, <disk_location>, <L
+
+SIMULADOR DE COLAS
+
+Para compilar single utiliza el siguiente comando:
+make clean ------> sirve para borrar los ejecutables antiguos
+make  --------> genera el ejecutable
+
+Ejecutar single:
+
+./single mean_interarrival mean_service num_delays_required
+
+Ejemplo:
+./single 6.17  1  242
+
+Donde:
+mean_interarrival: es el tiempo en el que llega cada petición realizada
+mean_service: es el tiempo promedio de servicio
+num_delays_required: es el número de peticiones que seran atendidas
+
+
+
+
