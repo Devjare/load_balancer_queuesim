@@ -1,5 +1,28 @@
 version: '3'
 services:
+  queue_sim:
+    image: "queuesim:v1"
+    build: QueueSimulator/
+    volumes:
+      - shared:/simulator/output
+    stdin_open: true
+    tty: true
+  middleware:
+    image: "middleware:v1"
+    build: middleware/
+    environment:
+      ST: "${ST}"
+      DELAY: "${DELAY}"
+      WORKERS: "${WORKERS}"
+      SERVER_IP: "${SERVER_IP}"
+      SERVER_PORT: "${SERVER_PORT}"
+      API_VERSION: "${API_VERSION}"
+    depends_on:
+      - "trace_gen"
+    volumes:
+      - shared:/middleware/output
+    stdin_open: true
+    tty: true
   trace_gen:
     image: "generator:v1"
     build: traceGenerator/
@@ -15,22 +38,6 @@ services:
       CONCURRENCY: "${CONCURRENCY}"
     volumes:
       - shared:/generator/output
-    stdin_open: true
-    tty: true
-  queue_sim:
-    image: "queuesim:v1"
-    build: QueueSimulator/
-    depends_on:
-      - "middleware"
-    volumes:
-      - shared:/simulator/output
-    stdin_open: true
-    tty: true
-  middleware:
-    image: "middleware:v1"
-    build: middleware/
-    volumes:
-      - shared:/middleware/output
     stdin_open: true
     tty: true
 
