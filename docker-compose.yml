@@ -3,6 +3,8 @@ services:
   queue_sim:
     image: "queuesim:v1"
     build: QueueSimulator/
+    environment:
+      TEST_NO: "${TEST_NO}"
     volumes:
       - shared:/simulator/output
     stdin_open: true
