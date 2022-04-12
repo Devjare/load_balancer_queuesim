@@ -95,6 +95,7 @@ def request_sim(worker_no, worker_id, interarrival, servicetime, num_delay):
     response = requests.post(url, headers=headers, json=json_data)
     
     rd = response.json()
+    print("Response: ", rd)
     exec_id = rd["Id"]
 
     # Exec command simulator
