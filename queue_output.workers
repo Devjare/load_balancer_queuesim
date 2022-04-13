@@ -1,18 +1,6 @@
 REPORT WORKER 1
-single 4483.375 100 100
-Average delay in queue: 5.059453
-Average number in queue: 0.001481
-Server Utilization: 0.027417
-Time simulation ended: 341708.562500
-REPORT WORKER 2
-single 4493.15625 100 100
-Average delay in queue: 5.049101
-Average number in queue: 0.001474
-Server Utilization: 0.027357
-Time simulation ended: 342453.875000
-REPORT WORKER 3
-single 4503.967741935484 100 100
-Average delay in queue: 5.037754
-Average number in queue: 0.001468
-Server Utilization: 0.027292
-Time simulation ended: 343278.000000
+single 7.326621666672594 10 1
+Average delay in queue: 0.000000
+Average number in queue: 0.000000
+Server Utilization: 0.000000
+Time simulation ended: 2.401868

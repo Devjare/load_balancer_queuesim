@@ -1,5 +1,7 @@
-QueueSimulator
-traceGenerator
+QueueSimulator/*
+!QueueSimulator/simul.sh
+traceGenerator/*
+!traceGenerator/generate.sh
 sockets_test
 test
 reqtest.py

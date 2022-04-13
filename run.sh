@@ -12,4 +12,9 @@ echo WORKERS=${WORKERS} >> .env
       # Detached
 docker-compose --env-file ./.env.general up -d --build --scale queue_sim=$WORKERS
       # Attached
+# docker-compose --env-file ./.env.general up --build --scale queue_sim=$WORKERS
 rm ./.env
+
+sleep 3s
+
+./results.sh

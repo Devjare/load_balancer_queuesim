@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 import requests
+import math
 
 RANDOM = 'R'
 ROUND_ROBIN = 'RR'
@@ -69,7 +70,7 @@ def get_id_worker(worker_number):
     for d in data:
         # print("Id: %s, Container Name: %s, Image: %s" 
                 # % (d["Id"], d["Names"][0], d["Image"]))
-        worker_no = d["Names"][0][-1] # Number of the worker given by compose.
+        worker_no = d["Names"][0].split("_")[-1] # Number of the worker given by compose.
         Id = d["Id"] # Number of the worker given by compose.
         if(worker_no == str(worker_number)):
             print("Adding to worker: ", worker_no)
@@ -95,7 +96,6 @@ def request_sim(worker_no, worker_id, interarrival, servicetime, num_delay):
     response = requests.post(url, headers=headers, json=json_data)
     
     rd = response.json()
-    print("Response: ", rd)
     exec_id = rd["Id"]
 
     # Exec command simulator
@@ -115,19 +115,10 @@ print("Workers: %d, service_Time: %d, delays: %d" % (no_workers, mean_service, n
 for i in inter_arrivals:
    # last index is mean 
     worker_id = get_id_worker(i)
-    request_sim(i, worker_id, inter_arrivals[i][-1], mean_service, num_delays)
+    # change scale to make more viable results
+    mean_inter_arrival = math.log(inter_arrivals[i][-1])
+    request_sim(i, worker_id, mean_inter_arrival, mean_service, num_delays)
    # with open("./output/input", "w") as f:
    #      inpt = "" + str(inter_arrival_mean) + " " + str(mean_service) + " " + str(num_delays) + "\n"
    #      f.write(inpt)
 
-
-# PRocess: 
-# 1. generate trace
-#   1.1 Save tracefile as csv on shared volume
-# 2. Execute middle ware.
-#   2.1 Middleware reads trace csv from shared volume
-#   2.2 Middleware process csv.
-#   2.3 Middleware geneartes file with input for QueueSimulator.
-#   2.4 Middleware saves file with input on shared volume.
-# 3. Execute Queue Simulator
-#   3.1 Queue simulator takes as input file on shared volume (With pipe)
