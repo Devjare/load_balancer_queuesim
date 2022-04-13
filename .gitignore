@@ -1,7 +1,9 @@
 QueueSimulator/*
 !QueueSimulator/simul.sh
+!QueueSimulator/Dockerfile
 traceGenerator/*
 !traceGenerator/generate.sh
+!traceGenerator/Dockerfile
 sockets_test
 test
 reqtest.py
