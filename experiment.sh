@@ -1,0 +1,6 @@
+echo "EXPERIMENTING 1 WORKERS"
+./run.sh 1
+echo "EXPERIMENTING 3 WORKERS"
+./run.sh 3
+echo "EXPERIMENTING 5 WORKERS"
+./run.sh 5

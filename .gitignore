@@ -6,4 +6,7 @@ traceGenerator/*
 !traceGenerator/Dockerfile
 sockets_test
 test
+test_files
 reqtest.py
+results
+images

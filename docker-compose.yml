@@ -3,6 +3,9 @@ services:
   queue_sim:
     image: "queuesim:v1"
     build: QueueSimulator/
+    environment:
+      TESTNO: "${TESTNO}"
+      BALANCER: "${BALANCER}"
     volumes:
       - shared:/simulator/output
     stdin_open: true
@@ -17,6 +20,7 @@ services:
       SERVER_IP: "${SERVER_IP}"
       SERVER_PORT: "${SERVER_PORT}"
       API_VERSION: "${API_VERSION}"
+      BALANCER: "${BALANCER}"
     depends_on:
       - "trace_gen"
     volumes:
